@@ -101,3 +101,9 @@ class Test(unittest.TestCase):
             self.connection.start_tls()
             result = self.connection.extend.novell.get_universal_password(test_user)
             self.assertEqual(result, test_password)
+
+    def test_novell_check_password_policy(self):
+        if test_server_type == 'EDIR' and not self.connection.strategy.no_real_dsa:
+            self.connection.start_tls()
+            result = self.connection.extend.novell.check_password_policy(test_user, test_password)
+            self.assertEqual(result, 0)

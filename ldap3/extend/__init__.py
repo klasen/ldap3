@@ -37,6 +37,7 @@ from .novell.replicaInfo import ReplicaInfo
 from .novell.listReplicas import ListReplicas
 from .novell.getBindDn import GetBindDn
 from .novell.nmasGetUniversalPassword import NmasGetUniversalPassword
+from .novell.nmasPasswordPolicyCheck import NmasPasswordPolicyCheck
 from .novell.nmasSetUniversalPassword import NmasSetUniversalPassword
 from .novell.startTransaction import StartTransaction
 from .novell.endTransaction import EndTransaction
@@ -259,6 +260,13 @@ class NovellExtendedOperations(ExtendedOperationContainer):
                                              groups_dn=groups,
                                              fix=fix,
                                              transaction=transaction)
+
+
+    def check_password_policy(self, user, password, controls=None):
+        return NmasPasswordPolicyCheck(self._connection,
+                                        user,
+                                        password,
+                                        controls).send()
 
 
 class MicrosoftExtendedOperations(ExtendedOperationContainer):

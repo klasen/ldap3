@@ -139,3 +139,32 @@ class GroupingControlValue(Sequence):
     componentType = NamedTypes(NamedType('groupingCookie', GroupCookie()),
                                OptionalNamedType('groupValue', OctetString())
                                )
+
+
+class NmasPasswordPolicyCheckPassword(Sequence):
+    componentType = NamedTypes(
+        NamedType('password', Password())
+    )
+
+
+class NmasPasswordPolicyCheckFlags(Sequence):
+    componentType = NamedTypes(
+        NamedType('checkCurrent', Integer()),
+        OptionalNamedType('checkPassword', NmasPasswordPolicyCheckPassword())
+    )
+
+
+class NmasPasswordPolicyCheckRequestValue(Sequence):
+    componentType = NamedTypes(
+        NamedType('nmasver', NmasVer()),
+        NamedType('reqdn', Identity()),
+        NamedType('flags', NmasPasswordPolicyCheckFlags())
+    )
+
+
+class NmasPasswordPolicyCheckResponseValue(Sequence):
+    componentType = NamedTypes(
+        NamedType('nmasver', NmasVer()),
+        NamedType('err', Error()),
+        OptionalNamedType('data', OctetString())
+    )
